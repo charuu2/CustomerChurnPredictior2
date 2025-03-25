@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 50px; 
+            background-color: #f5e6ca; /* Light brown background */
+        }
+        form { 
+            max-width: 400px; 
+            margin: auto; 
+            padding: 20px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            background-color: white; /* White form background for contrast */
+        }
+        input, select { 
+            width: 100%; 
+            padding: 8px; 
+            margin: 5px 0; 
+        }
+        button { 
+            padding: 10px 15px; 
+            background-color: #28a745; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background-color: #218838; 
+        }
+        .result { 
+            font-weight: bold; 
+            margin-top: 20px; 
+            color: blue; 
+        }
+        .error { 
+            color: red; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Customer Churn Prediction</h2>
+    <form action="/predict" method="post">
+        <label>Gender:</label>
+        <select name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label>Senior Citizen (1 = Yes, 0 = No):</label>
+        <select name="SeniorCitizen">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label>Partner:</label>
+        <select name="Partner">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Dependents:</label>
+        <select name="Dependents">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Tenure (months):</label>
+        <input type="number" name="tenure" required>
+
+        <label>Phone Service:</label>
+        <select name="PhoneService">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Multiple Lines:</label>
+        <select name="MultipleLines">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <label>Internet Service:</label>
+        <select name="InternetService">
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber optic</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Online Security:</label>
+        <select name="OnlineSecurity">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Online Backup:</label>
+        <select name="OnlineBackup">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Device Protection:</label>
+        <select name="DeviceProtection">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Tech Support:</label>
+        <select name="TechSupport">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Streaming TV:</label>
+        <select name="StreamingTV">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Streaming Movies:</label>
+        <select name="StreamingMovies">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Contract Type:</label>
+        <select name="Contract">
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+        </select>
+
+        <label>Paperless Billing:</label>
+        <select name="PaperlessBilling">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Payment Method:</label>
+        <select name="PaymentMethod">
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer">Bank transfer</option>
+            <option value="Credit card">Credit card</option>
+        </select>
+
+        <label>Monthly Charges ($):</label>
+        <input type="number" step="0.01" name="MonthlyCharges" required>
+
+        <label>Total Charges ($):</label>
+        <input type="number" step="0.01" name="TotalCharges" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <p class="result">Churn Prediction: {{ prediction }}</p>
+        <p class="result">Churn Probability: {{ probability }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+</body>
+</html>
